@@ -5,12 +5,12 @@ const bcrypt = require('bcryptjs')
 
 let usert = false
 let pass = false
-let login = false
+let log = false
 
 console.log('-> Creation de la DB <-')
 while (log === false) {
-  var log = readline.question('login: ')
-  let login = log.trin().split(' ')
+  var login = readline.question('Login: ')
+  login = login.trim().split(' ')
   if (login.length === 1) log = true
 }
 
@@ -33,26 +33,23 @@ let user = {
   _id: id,
   lock: true,
   block: false,
-  superUser: true,
-  prenom: '',
-  nom: '',
-  birthday: '',
+  admin: true,
+  login: login[0],
   mail: username,
   passwd: hash,
   path: '',
-  firstConnexion: false,
   lastConnexion: '',
-  tokens: [],
-  project: []
+  tokens: []
 }
 
 // Connect to the db
-MongoClient.connect('mongodb://localhost:27017/soyuz_it', (err, db) => {
+MongoClient.connect('mongodb://localhost:27017/', (err, db) => {
   if (err) { return console.dir(err) }
-  db.createCollection('Users', () => {
+  var dbase = db.db('soyuz_it')
+  dbase.createCollection('Users', () => {
     console.log(`Create Table Users`)
   })
-  db.collection('Users').insert(user, null, (err, result) => {
+  dbase.collection('Users').insert(user, null, (err, result) => {
     if (err) {
       console.dir(err)
       process.exit()
