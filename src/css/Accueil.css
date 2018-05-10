@@ -1,0 +1,48 @@
+.bodyAccueil {
+  height: calc(100vh - 50px);
+  width: 100vw;
+  background-image: url('../image/terre.jpg');
+  background-position: center;
+  background-size: cover;
+  display: flex;
+}
+
+.bodyAccueil .blockAccueil {
+  height: 400px;
+  width: 600px;
+  background-color:rgba(255, 255, 255, .2); 
+  border-radius: 10px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.bodyAccueil .blockAccueil .firstBlock {
+  height: 30%;
+  width: 100%;
+  display: flex;
+}
+
+.bodyAccueil .blockAccueil .firstBlock .title {
+  margin: auto;
+  opacity: 1;
+  font-size: 70px;
+  color: #fbbc05;
+  text-align: center;
+  align-items: center;
+}
+.bodyAccueil .blockAccueil .secondBlock {
+  height: 60%;
+  width: 100%;
+}
+
+.bodyAccueil .blockAccueil .threeBlock {
+  height: 10%;
+  width: 100%;
+}
+
+.inputLogin {
+  color: #fbbc05;
+  text-decoration: #fbbc05;
+  padding: 50px;
+}

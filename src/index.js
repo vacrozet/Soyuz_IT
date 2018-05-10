@@ -1,8 +1,37 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import './index.css'
+import registerServiceWorker from './registerServiceWorker'
+import {BrowserRouter, Route, Switch} from 'react-router-dom'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import getMuiTheme from 'material-ui/styles/getMuiTheme'
+import Router from './router.js'
 
-ReactDOM.render(<App />, document.getElementById('root'));
-registerServiceWorker();
+import {orange500} from 'material-ui/styles/colors'
+
+const muitheme = getMuiTheme({
+  palette: {
+    primary1Color: orange500
+  },
+  appBar: {
+    height: 50,
+    color: orange500
+  },
+  TextField: {
+    underlineStyle: orange500,
+    floatingLabelStyle: orange500,
+    floatingLabelFocusStyle: orange500
+  }
+})
+ReactDOM.render(
+  <BrowserRouter>
+    <MuiThemeProvider muiTheme={muitheme}>
+      <Switch>
+        <Route path='/' component={Router} />
+      </Switch>
+    </MuiThemeProvider>
+  </BrowserRouter>,
+  document.getElementById('root')
+)
+
+registerServiceWorker()
