@@ -7,6 +7,7 @@ import Drawer from 'material-ui/Drawer'
 import MenuHL from './components/MenuHL.js'
 import MenuIL from './components/MenuIL.js'
 import ForgetPass from './components/ForgetPass.js'
+import InfoDialog from './components/infoDialog.js'
 
 
 import store from './store.js'
@@ -50,6 +51,7 @@ class Router extends React.Component {
         {!store.login ? <MenuHL history={this.props.history}/> : <MenuIL history={this.props.history}/> }
         </Drawer>
         <ForgetPass />
+        <InfoDialog />
         <Switch>
           <Route path='/' component={Accueil} />
         </Switch>

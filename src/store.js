@@ -4,8 +4,10 @@ class Store {
   @observable login = false
   @observable drawer = false
   @observable dialogPassword = false
-  // @observable UserConnected = []
-  // @observable noti = []
+  @observable dialogOpen = false
+  @observable dialgTitle = ''
+  @observable dialogText = ''
+  @observable dialogDoubleButton = false
 
   @action
   logged (res) {
@@ -19,6 +21,12 @@ class Store {
   @action
   toggleDialogPassword (res) {
     this.dialogPassword = res
+  }
+  @action
+  openDialogInfo (open, title, text) {
+    this.dialogOpen = open
+    this.dialogTitle = title
+    this.dialogText = text
   }
 }
 let store = new Store()

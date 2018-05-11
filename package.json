@@ -2,8 +2,12 @@
   "name": "soyuz_it",
   "version": "0.1.0",
   "babel": {
-    "plugins": ["transform-decorators-legacy"],
-    "presets": ["react-app"]
+    "plugins": [
+      "transform-decorators-legacy"
+    ],
+    "presets": [
+      "react-app"
+    ]
   },
   "private": true,
   "dependencies": {
@@ -41,6 +45,7 @@
     "mobx": "^4.2.1",
     "mobx-react": "^5.1.2",
     "mongodb": "^2.2.33",
+    "nodemailer": "^4.6.4",
     "object-assign": "4.1.1",
     "postcss-flexbugs-fixes": "3.2.0",
     "postcss-loader": "2.0.8",
@@ -52,6 +57,7 @@
     "react-router-dom": "^4.2.2",
     "readline-sync": "^1.4.9",
     "resolve": "1.6.0",
+    "sendmail": "^1.2.0",
     "style-loader": "0.19.0",
     "sw-precache-webpack-plugin": "0.11.4",
     "url-loader": "0.6.2",
