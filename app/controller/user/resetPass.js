@@ -12,7 +12,6 @@ function response (res, code, bool, message) {
 }
 
 module.exports = (req, res) => {
-  console.log(req.body.mail)
   if (req.body.mail.match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)) {
     db.get().then((db) => {
       db.collection('Users').find({mail: req.body.mail}).toArray((err, result) => {
@@ -77,7 +76,6 @@ module.exports = (req, res) => {
             // send mail with defined transport object
             transporter.sendMail(mailOptions, (error, info) => {
               if (error) {
-                console.log(error)
                 return response(res, 'Mail was not send', 500)
               }
               db.collection('Users').update({mail: req.body.mail}, {
