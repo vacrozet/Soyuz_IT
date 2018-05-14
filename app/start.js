@@ -38,6 +38,7 @@ let user = {
   mail: username,
   passwd: hash,
   path: '',
+  hash: '',
   lastConnexion: '',
   tokens: []
 }

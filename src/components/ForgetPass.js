@@ -6,7 +6,7 @@ import { local } from '../utils/api.js'
 import store from '../store.js'
 import { observer } from 'mobx-react'
 import RefreshIndicator from 'material-ui/RefreshIndicator'
-
+import validator from  'validator'
 
 @observer
 class ForgetPass extends Component {
@@ -22,7 +22,7 @@ class ForgetPass extends Component {
     this.setState({[evt.target.name]: evt.target.value})
   }
   handleConnexion () {
-    if (this.state.mail !== '') {
+    if (validator.isEmail(this.state.mail)) {
       this.setState({
         loading: true,
         disabledCTA: true

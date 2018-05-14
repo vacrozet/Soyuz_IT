@@ -2,6 +2,7 @@ const db = require('../../db')
 var generator = require('generate-password')
 const nodemailer = require('nodemailer')
 const bcrypt = require('bcryptjs')
+const validator = require('validator')
 
 function response (res, code, bool, message) {
   res.status(code)
@@ -12,8 +13,8 @@ function response (res, code, bool, message) {
 }
 
 module.exports = (req, res) => {
-  if (req.body.mail.match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)) {
-    db.get().then((db) => {
+if (validator.isEmail(req.body.mail)) {
+  db.get().then((db) => {
       db.collection('Users').find({mail: req.body.mail}).toArray((err, result) => {
         if (err) return response(res, 204, false, 'Mail incorrect')
         if (result.length === 1) {

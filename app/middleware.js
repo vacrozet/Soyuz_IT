@@ -27,6 +27,7 @@ module.exports = (role) => {
         }
       }).toArray((err, result) => {
         if (err) return error(res, 500, false, 'Internal server error')
+        console.log('je passe ici')
         if (result.length !== 1) return error(res, 404, false, 'User not connected')
         req.user = {
           mail: result[0].mail,
