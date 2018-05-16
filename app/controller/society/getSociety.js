@@ -11,7 +11,7 @@ function response (res, code, bool, message) {
 module.exports = (req, res) => {
   // if (req.user.admin !== true) return response(res, 401, 'Acces non autorisé')
   db.get().then((db) => {
-    db.collection('Group').find().toArray((err, result) => {
+    db.collection('Society').find().toArray((err, result) => {
       if (err) return response(res, 500, false, 'Internal Server Erreur')
       if (result.length !== 0) {
         result.forEach(element => {

@@ -8,6 +8,8 @@ import MenuHL from './components/MenuHL.js'
 import MenuIL from './components/MenuIL.js'
 import ForgetPass from './components/ForgetPass.js'
 import InfoDialog from './components/infoDialog.js'
+import AddSociety from './route/AddSociety.js'
+import AddUser from './route/AddUser.js'
 
 
 import store from './store.js'
@@ -28,7 +30,6 @@ class Router extends React.Component {
 
   componentWillMount () {
     if (global.localStorage.getItem('token')) {
-      this.setState({logged: true})
       store.logged(true)
     }
   }
@@ -39,6 +40,9 @@ class Router extends React.Component {
         <AppBar
           title='SOYUZ IT'
           // showMenuIconButton={false}
+          onTitleClick={() => {
+            this.props.history.push('/')
+          }}
           onLeftIconButtonClick={() => {store.drowerAppBar(true)}}
           iconElementRight={store.login ? null : <Login history={this.props.history} /> }
         />
@@ -53,6 +57,8 @@ class Router extends React.Component {
         <ForgetPass />
         <InfoDialog />
         <Switch>
+          <Route exact path='/add-user' component={AddUser} />
+          <Route exact path='/add-society' component={AddSociety} />
           <Route path='/' component={Accueil} />
         </Switch>
       </div>

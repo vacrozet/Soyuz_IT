@@ -19,7 +19,7 @@ module.exports = (req, res) => {
   if (!validator.isLength(req.body.siret, [{min: 14, max: 14}])) return response(res, 400, false, 'N* de siret Incorect')
   if (!validator.isNumeric(req.body.siret)) return response(res, 400, false, 'N* de siret Incorect')
   db.get().then((db) => {
-    db.collection('Society').find({nameOfGroup: req.body.nameOfGroup}).toArray((err, result) => {
+    db.collection('Society').find({siret: req.body.siret}).toArray((err, result) => {
       if (err) return response(res, 500, false, 'Internal Server Erreur')
       if (result.length === 0) {
         let id = uuid()
@@ -28,10 +28,10 @@ module.exports = (req, res) => {
           name: req.body.name,
           nameOfSociety: req.body.nameOfGroup,
           adress: req.body.adresse,
-          next_adress: req.body.suite_adresse,
+          next_adress: req.body.suiteAdresse,
           pc: req.body.cp,
           city: req.body.ville,
-          country: req.body.ville,
+          country: req.body.pays,
           siret: req.body.siret,
           team: []
         }

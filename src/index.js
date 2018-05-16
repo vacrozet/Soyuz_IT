@@ -11,16 +11,16 @@ import {orange500} from 'material-ui/styles/colors'
 
 const muitheme = getMuiTheme({
   palette: {
-    primary1Color: orange500
+    primary1Color: orange500,
+    disabledColor: orange500
   },
   appBar: {
     height: 50,
     color: orange500
   },
   TextField: {
-    underlineStyle: orange500,
-    floatingLabelStyle: orange500,
-    floatingLabelFocusStyle: orange500
+    textColor: orange500,
+    hintColor: orange500
   }
 })
 ReactDOM.render(

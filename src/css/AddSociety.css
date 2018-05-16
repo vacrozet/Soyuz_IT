@@ -1,0 +1,14 @@
+.bodyAddSociety {
+  display: flex;
+  height: calc(100vh - 50px);
+  width: 100vw;
+  overflow: auto;
+}
+
+.bodyAddSociety > .formulaire {
+  margin: auto;
+  width: 450px;
+}
+.bodyAddSociety h2 {
+  color: #fbbc05;
+}

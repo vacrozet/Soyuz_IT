@@ -5,6 +5,7 @@
   background-position: center;
   background-size: cover;
   display: flex;
+  overflow: auto;
 }
 
 .bodyAccueil .blockAccueil {

@@ -12,7 +12,6 @@ class Store {
   @action
   logged (res) {
     this.login = res
-    console.log(res)
   }
   @action
   drowerAppBar (res) {

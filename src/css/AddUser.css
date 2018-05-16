@@ -1,0 +1,15 @@
+.bodyAdduser {
+    height: calc(100vh - 50px);
+    width: 100vw;
+    display: flex;
+    overflow: auto;
+}
+
+.bodyAdduser > .formulaire {
+    margin: auto;
+    width: 450px;
+}
+
+.bodyAdduser h2 {
+    color: #fbbc05;
+  }

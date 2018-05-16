@@ -27,6 +27,7 @@ class Logged extends React.Component {
         <MenuItem primaryText='Help' />
         <MenuItem primaryText='Sign out' onClick={() => {
           store.logged(false)
+          global.localStorage.removeItem('token')
           this.props.history.push('/')
         }} />
       </IconMenu>
