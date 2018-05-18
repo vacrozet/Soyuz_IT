@@ -4,7 +4,10 @@ import { local } from '../utils/api.js'
 import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
 import Paper from 'material-ui/Paper'
+import store from '../store.js'
+import { observer } from 'mobx-react'
 
+@observer
 class AddSociety extends Component {
   constructor (props) {
     super(props)
@@ -13,7 +16,7 @@ class AddSociety extends Component {
       nameOfSociety: '',
       adress: '',
       nextAdress: '',
-      cp: '',
+      pc: '',
       city: '',
       country: '',
       siret: ''
@@ -31,19 +34,41 @@ class AddSociety extends Component {
       this.state.pc !== '' &&
       this.state.city !== '' &&
       this.state.siret !== '') {
-      local().post('/society/createSociety', {
+      local().post('/society/create', {
         name: this.state.libelé,
         nameOfSociety: this.state.nameOfSociety,
         adress: this.state.adress,
         suiteAdress: this.state.nextAdress,
-        cp: this.state.cp,
+        cp: this.state.pc,
         ville: this.state.city,
         pays: this.state.country,
         siret: this.state.siret
       }).then((res) => {
-        console.log(res)
+        if (res.data.success === true) {
+          store.openDialogInfo(true, 'Success', `${res.data.message}`)
+          this.setState({
+            libelé: '',
+            nameOfSociety: '',
+            adress: '',
+            nextAdress: '',
+            pc: '',
+            city: '',
+            country: '',
+            siret: ''
+          })
+        }
       }).catch((err) => {
-        console.log(err)
+        store.openDialogInfo(true, 'Erreur', `${err.response.data.message}`)
+        this.setState({
+          libelé: '',
+          nameOfSociety: '',
+          adress: '',
+          nextAdress: '',
+          pc: '',
+          city: '',
+          country: '',
+          siret: ''
+        })
       })
     }
   }
@@ -51,9 +76,6 @@ class AddSociety extends Component {
     if (evt.key === 'Enter') {
       this.handleCreateSociety()
     }
-  }
-
-  componentWillMount () {
   }
 
   render () {
@@ -69,6 +91,7 @@ class AddSociety extends Component {
                 floatingLabelText='Libelé'
                 name='libelé'
                 fullWidth
+                value={this.state.libelé}
                 onChange={this.handleChange.bind(this)}
                 onKeyPress={this.handleKeyPress.bind(this)}
               /><br />
@@ -76,6 +99,7 @@ class AddSociety extends Component {
                 floatingLabelText='Nom société'
                 name='nameOfSociety'
                 fullWidth
+                value={this.state.nameOfSociety}
                 onChange={this.handleChange.bind(this)}
                 onKeyPress={this.handleKeyPress.bind(this)}
               /><br />
@@ -83,6 +107,7 @@ class AddSociety extends Component {
                 floatingLabelText='Adresse'
                 name='adress'
                 fullWidth
+                value={this.state.adress}
                 onChange={this.handleChange.bind(this)}
                 onKeyPress={this.handleKeyPress.bind(this)}
               /><br />
@@ -90,13 +115,15 @@ class AddSociety extends Component {
                 floatingLabelText='Adresse suite'
                 name='nextAdress'
                 fullWidth
+                value={this.state.nextAdress}
                 onChange={this.handleChange.bind(this)}
                 onKeyPress={this.handleKeyPress.bind(this)}
               /><br />
               <TextField
                 floatingLabelText='Code Postal'
-                name='cp'
+                name='pc'
                 fullWidth
+                value={this.state.pc}
                 onChange={this.handleChange.bind(this)}
                 onKeyPress={this.handleKeyPress.bind(this)}
               /><br />
@@ -104,6 +131,7 @@ class AddSociety extends Component {
                 floatingLabelText='Ville'
                 name='city'
                 fullWidth
+                value={this.state.city}
                 onChange={this.handleChange.bind(this)}
                 onKeyPress={this.handleKeyPress.bind(this)}
               /><br />
@@ -111,6 +139,7 @@ class AddSociety extends Component {
                 floatingLabelText='Pays'
                 name='country'
                 fullWidth
+                value={this.state.country}
                 onChange={this.handleChange.bind(this)}
                 onKeyPress={this.handleKeyPress.bind(this)}
               /><br />
@@ -118,12 +147,14 @@ class AddSociety extends Component {
                 floatingLabelText='N* de Siret'
                 name='siret'
                 fullWidth
+                value={this.state.siret}
                 onChange={this.handleChange.bind(this)}
                 onKeyPress={this.handleKeyPress.bind(this)}
               /><br /><br />
               <RaisedButton
                 label='créer'
                 primary
+                onClick={this.handleCreateSociety.bind(this)}
                 onKeyPress={this.handleKeyPress.bind(this)}
                 fullWidth
               />

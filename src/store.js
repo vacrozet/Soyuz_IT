@@ -7,7 +7,6 @@ class Store {
   @observable dialogOpen = false
   @observable dialgTitle = ''
   @observable dialogText = ''
-  @observable dialogDoubleButton = false
 
   @action
   logged (res) {

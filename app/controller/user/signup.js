@@ -12,7 +12,7 @@ function response (res, code, bool, message) {
     message: message
   })
 }
- 
+
 module.exports = (req, res) => {
   if (!req.body.idSociety.match(/^[A-F\d]{8}-[A-F\d]{4}-4[A-F\d]{3}-[89AB][A-F\d]{3}-[A-F\d]{12}$/i)) return response(res, 400, false, 'id society Incorect')
   if (!validator.isEmail(req.body.mail)) return response(res, 400, false, 'Email incorrect')
@@ -22,11 +22,40 @@ module.exports = (req, res) => {
   req.body.nom = req.body.nom[0].toUpperCase() + req.body.nom.substring(1).toLowerCase()
   var newPass = 'valentin' //generator.generate({length: 10, uppercase: false, numbers: true})
   db.get().then((db) => {
-    db.collection('Society').find({_id: req.body.idSociety}).toArray((err, resultSociety) => {
-      if (err) return response(res, 500, false, 'Internal Server Erreur')
-      if (resultSociety.length !== 1) return response(res, 404, false, 'Société non trouvé')
-      resultSociety[0].team.forEach(element => {
-        if ((element.prenom === req.body.prenom) && (element.nom === req.body.nom)) return response(res, 403, false, 'Utilisateur déjà présent dans cette société')
+    db.collection('Users').find({mail: req.body.mail}).toArray((err, resultUser) => {
+      if (err) return response(res, 500, false, 'Internal Server Error')
+      if (resultUser.length !== 0) return response(res, 200, false, 'Utilisateur déjà présent')
+      let admin = false
+      if (req.body.idSociety === '7d35cdad-830f-4efb-bce2-1cc5d60b019e') admin = true
+      let id = uuid()
+      let user = {
+        _id: id,
+        lock: true,
+        block: false,
+        admin: admin,
+        prenom: req.body.prenom,
+        nom: req.body.nom,
+        poste: '',
+        login: '',
+        mail: req.body.mail,
+        passwd: bcrypt.hashSync(newPass, 10),
+        path: '',
+        hash: '',
+        lastConnexion: '',
+        tokens: []
+      }
+      let userSociety = {
+        nom: req.body.prenom + ' ' + req.body.nom,
+        mail: req.body.mail,
+        poste: req.body.poste
+      }
+
+      db.collection('Users').insert(user, null, (error, result) => {
+        if (error) return response(res, 500, false, 'Internal Server Error')
+        if (result.result.ok !== 1) return response(res, 500, false, 'Internal Server Error')
+      })
+      db.collection('Society').updateOne({_id: req.body.idSociety}, {
+        $push: {team: userSociety}
       })
       nodemailer.createTestAccount((err, account) => {
         if (err) return response(res, 500, false, 'Mail non envoyé')
@@ -90,37 +119,9 @@ module.exports = (req, res) => {
         // send mail with defined transport object
         transporter.sendMail(mailOptions, (error, info) => {
           if (error) return response(res, 500, false, 'Mail was not send')
-          let id = uuid()
-          let admin = false
-          if (resultSociety[0].name.toLowerCase() === 'soyuz') admin = true
-          let user = {
-            _id: id,
-            lock: true,
-            block: false,
-            admin: admin,
-            prenom: req.body,prenom,
-            nom: req.body.nom,
-            poste: '',
-            login: '',
-            mail: req.body.mail,
-            passwd: bcrypt.hashSync(newPass, 10),
-            path: '',
-            hash: '',
-            lastConnexion: '',
-            tokens: []
-          }
-          db.get().then((db) => {
-            db.collection('Society').find({_id: req.body.idSociety}).toArray((err, resultSociety) => {
-              if (err) return response(res, 500, false, 'Internal Server Erreur')
-              if (resultSociety.length !== 1) return response(res, 404, false, 'Société non trouvé')
-              resultSociety[0].team.forEach(element => {
-                if ((element.prenom === req.body.prenom) && (element.nom === req.body.nom)) return response(res, 403, false, 'Utilisateur déjà présent dans cette société')
-              })
-              
-            })
-          })
+          return response(res, 200, true, 'Utilisateur inscrit')
+        })
       })
-      })
-    })  
+    })
   })
 }

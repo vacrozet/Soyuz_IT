@@ -11,8 +11,8 @@ function response (res, code, bool, message) {
 }
 
 module.exports = (req, res) => {
-  if (!validator.isAlphanumeric(req.body.name, ['fr-FR'])) return response(res, 400, false, 'Nom de group Incorrect')
-  if (!validator.isAlphanumeric(req.body.nameOfGroup, ['fr-FR'])) return response(res, 400, false, 'Nom société Incorrect')
+  if (req.body.name === '') return response(res, 400, false, 'Nom de group Incorrect')
+  if (req.body.nameOfSociety === '') return response(res, 400, false, 'Nom société Incorrect')
   if (req.body.adresse === '') return response(res, 400, false, 'Adresse Incorrect')
   if (!validator.isPostalCode(req.body.cp, 'FR')) return response(res, 400, false, 'Code Postal Incorrect')
   if (!validator.isAlpha(req.body.pays, ['fr-FR'])) return response(res, 400, false, 'Pays Incorrect')
@@ -26,9 +26,9 @@ module.exports = (req, res) => {
         let society = {
           _id: id,
           name: req.body.name,
-          nameOfSociety: req.body.nameOfGroup,
-          adress: req.body.adresse,
-          next_adress: req.body.suiteAdresse,
+          nameOfSociety: req.body.nameOfSociety,
+          adress: req.body.adress,
+          next_adress: req.body.suiteAdress,
           pc: req.body.cp,
           city: req.body.ville,
           country: req.body.pays,
@@ -37,7 +37,7 @@ module.exports = (req, res) => {
         }
         db.collection('Society').insert(society, null, (err, result) => {
           if (err) return response(res, 500, false, 'Erreur Ajout Group')
-          if (result) return response(res, 200, true, 'Groupe Ajouté')
+          if (result) return response(res, 200, true, 'Société Ajouté')
         })
       } else return response(res, 400, false, 'Société déjà existante')
     })

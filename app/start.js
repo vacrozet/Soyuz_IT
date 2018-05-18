@@ -42,6 +42,18 @@ let user = {
   lastConnexion: '',
   tokens: []
 }
+let société = {
+  _id: '7d35cdad-830f-4efb-bce2-1cc5d60b019e',
+  name: 'Soyuz',
+  nameOfSociety: 'El Sur',
+  adress: '102 rue du fbg poissonniere',
+  next_adress: '',
+  pc: '75010',
+  city: 'Paris',
+  country: 'France',
+  siret: '75332382300025',
+  team: []
+}
 
 // Connect to the db
 MongoClient.connect('mongodb://localhost:27017/', (err, db) => {
@@ -56,6 +68,14 @@ MongoClient.connect('mongodb://localhost:27017/', (err, db) => {
       process.exit()
     } else {
       console.log('User Insert')
+    }
+  })
+  dbase.collection('Society').insert(société, null, (error, resultSociety) => {
+    if (error) {
+      console.dir(error)
+      process.exit()
+    } else {
+      console.log('Society Insert')
     }
   })
   db.close()
