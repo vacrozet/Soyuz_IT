@@ -8,6 +8,7 @@
 .bodyAdduser > .formulaire {
     margin: auto;
     width: 450px;
+    padding: 15px;
 }
 
 .bodyAdduser h2 {

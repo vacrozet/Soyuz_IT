@@ -4,7 +4,6 @@ import '../css/AddUser.css'
 
 import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
-import Paper from 'material-ui/Paper'
 import SelectField from 'material-ui/SelectField'
 import MenuItem from 'material-ui/MenuItem'
 import RefreshIndicator from 'material-ui/RefreshIndicator'
@@ -85,74 +84,72 @@ class AddUser extends Component {
     return (
       <div className='bodyAdduser'>
         <div className='formulaire'>
-          <Paper style={{padding: 20}} zDepth={5}>
-              {this.state.loading? (
-                <RefreshIndicator
-                size={50}
-                left={0}
-                top={0}
-                loadingColor="#FF9800"
-                status="loading"
-                style={{position: 'relative', marginLeft: '45%'}}
-                />
-              ) :
-              <form>
-                <center>
-                  <h2><u>Nouvel Utilisateur</u></h2>
-                </center><br />
-                <SelectField
-                  multiple={false}
-                  hintText='Selectionner une Société'
-                  value={this.state.values}
-                  fullWidth
-                  onChange={this.handleChangeSelect}
-                >
-                  {this.state.society ? this.state.society.map((res, index) => {
-                    return (<MenuItem key={index} checked={false} value={res} primaryText={res.name} />)
-                  }) : null }
-                </SelectField>
-                <TextField
-                  floatingLabelText='Prenom'
-                  name='prenom'
-                  fullWidth
-                  value={this.state.prenom}
-                  onChange={this.handleChange.bind(this)}
-                  onKeyPress={this.handleKeyPress.bind(this)}
-                /><br />
-                <TextField
-                  floatingLabelText='Nom'
-                  name='nom'
-                  fullWidth
-                  value={this.state.nom}
-                  onChange={this.handleChange.bind(this)}
-                  onKeyPress={this.handleKeyPress.bind(this)}
-                /><br />
-                <TextField
-                  floatingLabelText='Mail'
-                  name='mail'
-                  fullWidth
-                  value={this.state.mail}
-                  onChange={this.handleChange.bind(this)}
-                  onKeyPress={this.handleKeyPress.bind(this)}
-                /><br />
-                <TextField
-                  floatingLabelText='Poste Occupé'
-                  name='poste'
-                  fullWidth
-                  value={this.state.poste}
-                  onChange={this.handleChange.bind(this)}
-                  onKeyPress={this.handleKeyPress.bind(this)}
-                /><br /><br />
-                <RaisedButton
-                  label='créer'
-                  primary
-                  onClick={this.handleSignup.bind(this)}
-                  onKeyPress={this.handleKeyPress.bind(this)}
-                  fullWidth
-                />
-              </form>
-              }
-          </Paper>
+          {this.state.loading? (
+            <RefreshIndicator
+            size={50}
+            left={0}
+            top={0}
+            loadingColor="#FF9800"
+            status="loading"
+            style={{position: 'relative', marginLeft: '45%'}}
+            />
+          ) :
+          <form>
+            <center>
+              <h2><u>Nouvel Utilisateur</u></h2>
+            </center><br />
+            <SelectField
+              multiple={false}
+              hintText='Selectionner une Société'
+              value={this.state.values}
+              fullWidth
+              onChange={this.handleChangeSelect}
+            >
+              {this.state.society ? this.state.society.map((res, index) => {
+                return (<MenuItem key={index} checked={false} value={res} primaryText={res.name} />)
+              }) : null }
+            </SelectField>
+            <TextField
+              floatingLabelText='Prenom'
+              name='prenom'
+              fullWidth
+              value={this.state.prenom}
+              onChange={this.handleChange.bind(this)}
+              onKeyPress={this.handleKeyPress.bind(this)}
+            /><br />
+            <TextField
+              floatingLabelText='Nom'
+              name='nom'
+              fullWidth
+              value={this.state.nom}
+              onChange={this.handleChange.bind(this)}
+              onKeyPress={this.handleKeyPress.bind(this)}
+            /><br />
+            <TextField
+              floatingLabelText='Mail'
+              name='mail'
+              fullWidth
+              value={this.state.mail}
+              onChange={this.handleChange.bind(this)}
+              onKeyPress={this.handleKeyPress.bind(this)}
+            /><br />
+            <TextField
+              floatingLabelText='Poste Occupé'
+              name='poste'
+              fullWidth
+              value={this.state.poste}
+              onChange={this.handleChange.bind(this)}
+              onKeyPress={this.handleKeyPress.bind(this)}
+            /><br /><br />
+            <RaisedButton
+              label='créer'
+              primary
+              onClick={this.handleSignup.bind(this)}
+              onKeyPress={this.handleKeyPress.bind(this)}
+              fullWidth
+            />
+          </form>
+          }
         </div>
       </div>
     )

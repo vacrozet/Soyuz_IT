@@ -1,13 +1,16 @@
 import React, { Component } from 'react'
 import MobileTearSheet from './MobileTearSheet'
+
 import {List, ListItem} from 'material-ui/List'
+import Divider from 'material-ui/Divider'
+
 import Settings from 'material-ui/svg-icons/action/settings'
 import PersonAdd from 'material-ui/svg-icons/social/person-add'
 import GroupAdd from 'material-ui/svg-icons/social/group-add'
 import Lists from 'material-ui/svg-icons/action/list'
 import Lock from 'material-ui/svg-icons/action/lock'
 import PowerSettingsNew from 'material-ui/svg-icons/action/power-settings-new'
-import Divider from 'material-ui/Divider'
+
 import store from '../store.js'
 import { observer } from 'mobx-react'
 
