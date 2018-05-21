@@ -5,6 +5,7 @@ import Settings from 'material-ui/svg-icons/action/settings'
 import PersonAdd from 'material-ui/svg-icons/social/person-add'
 import GroupAdd from 'material-ui/svg-icons/social/group-add'
 import Lists from 'material-ui/svg-icons/action/list'
+import Lock from 'material-ui/svg-icons/action/lock'
 import PowerSettingsNew from 'material-ui/svg-icons/action/power-settings-new'
 import Divider from 'material-ui/Divider'
 import store from '../store.js'
@@ -52,9 +53,15 @@ class MenuIL extends Component {
           />
           <Divider />
           <ListItem primaryText='Settings' hoverColor='#fbbc05' leftIcon={<Settings />} 
+          onClick={() => {
+            store.drowerAppBar(false)
+            this.props.history.push('/settings')
+          }}
+          />
+          <ListItem primaryText='Password' hoverColor='#fbbc05' leftIcon={<Lock />} 
             onClick={() => {
               store.drowerAppBar(false)
-              this.props.history.push('/settings')
+              this.props.history.push('/settings/changepass')
             }}
           />
           <ListItem primaryText='Log Out' hoverColor='#fbbc05' leftIcon={<PowerSettingsNew />}

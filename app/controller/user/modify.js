@@ -10,8 +10,6 @@ function response (res, code, bool, message) {
 }
 
 module.exports = (req, res) => {
-  console.log(req.user)
-  console.log(req.body)
   if (!validator.isEmail(req.body.mail)) return response(res, 200, false, 'Adresse Mail Incorrect')
   if (req.user.mail !== req.body.mail) {
     db.get().then((db) => {

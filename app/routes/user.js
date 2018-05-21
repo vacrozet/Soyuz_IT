@@ -7,5 +7,6 @@ router.post('/resetpassword', require('../controller/user/resetPass.js'))
 router.post('/signup', require('../controller/user/signup.js'))
 router.get('/info', middle('USER'), require('../controller/user/info.js'))
 router.post('/modify', middle('USER'), require('../controller/user/modify.js'))
+router.post('/changepass', middle('USER'), require('../controller/user/changePass.js'))
 
 module.exports = router

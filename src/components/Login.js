@@ -12,7 +12,7 @@ class Login extends React.Component {
     super(props)
     this.state = {
       open: false,
-      login: '',
+      mail: '',
       password: ''
     }
   }
@@ -23,11 +23,11 @@ class Login extends React.Component {
   }
 
   handleConnexion () {
-    if (this.state.login !== '' && this.state.password !== '') {
-      local().get('/user/signin', 
+    if (this.state.mail !== '' && this.state.password !== '') {
+      local().get('/user/signin',
         {
         params:{
-          login: this.state.login,
+          mail: this.state.mail,
           password: this.state.password
         }
         }).then((res) => {
@@ -81,8 +81,8 @@ class Login extends React.Component {
           onRequestClose={() => this.setState({open: false})}
         >
           <TextField
-            floatingLabelText='Login'
-            name='login'
+            floatingLabelText='Mail'
+            name='mail'
             value={this.state.login}
             onChange={this.handleChange.bind(this)}
             onKeyPress={this.handleKeyPress.bind(this)}
@@ -90,6 +90,7 @@ class Login extends React.Component {
           <TextField
             floatingLabelText='Password'
             name='password'
+            type="password"
             value={this.state.password}
             onChange={this.handleChange.bind(this)}
             onKeyPress={this.handleKeyPress.bind(this)}

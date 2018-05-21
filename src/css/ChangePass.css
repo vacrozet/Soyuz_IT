@@ -1,0 +1,15 @@
+.bodyChangePass {
+    height: calc(100vh - 50px);
+    width: 100vw;
+    display: flex;
+    overflow: auto;
+}
+
+.bodyChangePass > .formulaire {
+    margin: auto;
+    width: 450px;
+}
+
+.bodyChangePass h2 {
+    color: #fbbc05;
+  }

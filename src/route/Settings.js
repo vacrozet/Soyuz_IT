@@ -3,7 +3,6 @@ import { local } from '../utils/api'
 import '../css/Settings.css'
 import validator from 'validator'
 
-import Paper from 'material-ui/Paper'
 import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
 
@@ -64,51 +63,49 @@ class Settings extends Component {
     return (
       <div className='bodySettings'>
         <div className='formulaire'>
-          <Paper style={{padding: 20}} zDepth={5}>
-            <form>
-              <center><h2><u>Préférences</u></h2></center>
-              <TextField
-                floatingLabelText='Mail'
-                name='mail'
-                fullWidth
-                type='mail'
-                value={this.state.mail}
-                onChange={this.handleChange.bind(this)}
-                onKeyPress={this.handleKeyPress.bind(this)}
-              /><br />
-              <TextField
-                floatingLabelText='Prenom'
-                name='prenom'
-                fullWidth
-                value={this.state.prenom}
-                onChange={this.handleChange.bind(this)}
-                onKeyPress={this.handleKeyPress.bind(this)}
-              /><br />
-              <TextField
-                floatingLabelText='Nom'
-                name='nom'
-                fullWidth
-                value={this.state.nom}
-                onChange={this.handleChange.bind(this)}
-                onKeyPress={this.handleKeyPress.bind(this)}
-              /><br />
-              <TextField
-                floatingLabelText='Poste'
-                name='poste'
-                fullWidth
-                value={this.state.poste}
-                onChange={this.handleChange.bind(this)}
-                onKeyPress={this.handleKeyPress.bind(this)}
-              /><br /><br />
-              <RaisedButton
-                label='Modifier'
-                primary
-                onClick={this.handleModify.bind(this)}
-                onKeyPress={this.handleKeyPress.bind(this)}
-                fullWidth
-              />
-            </form>
-          </Paper>
+          <form>
+            <center><h2><u>Préférences</u></h2></center>
+            <TextField
+              floatingLabelText='Mail'
+              name='mail'
+              fullWidth
+              type='mail'
+              value={this.state.mail}
+              onChange={this.handleChange.bind(this)}
+              onKeyPress={this.handleKeyPress.bind(this)}
+            /><br />
+            <TextField
+              floatingLabelText='Prenom'
+              name='prenom'
+              fullWidth
+              value={this.state.prenom}
+              onChange={this.handleChange.bind(this)}
+              onKeyPress={this.handleKeyPress.bind(this)}
+            /><br />
+            <TextField
+              floatingLabelText='Nom'
+              name='nom'
+              fullWidth
+              value={this.state.nom}
+              onChange={this.handleChange.bind(this)}
+              onKeyPress={this.handleKeyPress.bind(this)}
+            /><br />
+            <TextField
+              floatingLabelText='Poste'
+              name='poste'
+              fullWidth
+              value={this.state.poste}
+              onChange={this.handleChange.bind(this)}
+              onKeyPress={this.handleKeyPress.bind(this)}
+            /><br /><br />
+            <RaisedButton
+              label='Modifier'
+              primary
+              onClick={this.handleModify.bind(this)}
+              onKeyPress={this.handleKeyPress.bind(this)}
+              fullWidth
+            />
+          </form>
         </div>
       </div>
     )
