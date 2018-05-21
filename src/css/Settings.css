@@ -1,0 +1,15 @@
+.bodySettings {
+    height: calc(100vh - 50px);
+    width: 100vw;
+    display: flex;
+    overflow: auto;
+}
+
+.bodySettings > .formulaire {
+    margin: auto;
+    width: 450px;
+}
+
+.bodySettings h2 {
+    color: #fbbc05;
+  }

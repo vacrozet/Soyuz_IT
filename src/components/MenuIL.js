@@ -51,7 +51,12 @@ class MenuIL extends Component {
           }}
           />
           <Divider />
-          <ListItem primaryText='Settings' hoverColor='#fbbc05' leftIcon={<Settings />} />
+          <ListItem primaryText='Settings' hoverColor='#fbbc05' leftIcon={<Settings />} 
+            onClick={() => {
+              store.drowerAppBar(false)
+              this.props.history.push('/settings')
+            }}
+          />
           <ListItem primaryText='Log Out' hoverColor='#fbbc05' leftIcon={<PowerSettingsNew />}
             onClick={() => {
               store.logged(false)

@@ -10,6 +10,7 @@ import ForgetPass from './components/ForgetPass.js'
 import InfoDialog from './components/infoDialog.js'
 import AddSociety from './route/AddSociety.js'
 import AddUser from './route/AddUser.js'
+import Settings from './route/Settings.js'
 
 
 import store from './store.js'
@@ -57,6 +58,7 @@ class Router extends React.Component {
         <ForgetPass />
         <InfoDialog />
         <Switch>
+          <Route exact path='/settings' component={Settings} />
           <Route exact path='/add-user' component={AddUser} />
           <Route exact path='/add-society' component={AddSociety} />
           <Route path='/' component={Accueil} />

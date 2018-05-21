@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import { local } from '../utils/api'
 import '../css/AddUser.css'
+
 import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
 import Paper from 'material-ui/Paper'
 import SelectField from 'material-ui/SelectField'
 import MenuItem from 'material-ui/MenuItem'
 import RefreshIndicator from 'material-ui/RefreshIndicator'
+
 import store from '../store.js'
 import { observer } from 'mobx-react'
 
