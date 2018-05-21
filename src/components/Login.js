@@ -31,7 +31,6 @@ class Login extends React.Component {
           password: this.state.password
         }
         }).then((res) => {
-          console.log(res)
           if (res.data.success === true) {
             this.setState({open: !this.state.open}, () => {
               global.localStorage.setItem('token', res.data.token)

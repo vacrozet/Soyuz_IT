@@ -5,15 +5,18 @@ const bcrypt = require('bcryptjs')
 
 let usert = false
 let pass = false
-let log = false
+let prenom = false
+let nom = false
 
 console.log('-> Creation de la DB <-')
-while (log === false) {
-  var login = readline.question('Login: ')
-  login = login.trim().split(' ')
-  if (login.length === 1) log = true
+while (prenom === false) {
+  var name = readline.question('Prénom: ')
+  if (name !== '') prenom = true
 }
-
+while (nom === false) {
+  var lastname = readline.question('Nom: ')
+  if (lastname !== '') nom = true
+}
 while (usert === false) {
   var username = readline.question('Mail: ')
   if (username.match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)) {
@@ -34,13 +37,23 @@ let user = {
   lock: true,
   block: false,
   admin: true,
-  login: login[0],
+  nom: lastname,
+  prenom: name,
   mail: username,
+  nameSociety: 'Soyuz',
+  idSociety: '7d35cdad-830f-4efb-bce2-1cc5d60b019e',
+  poste: '',
   passwd: hash,
   path: '',
   hash: '',
   lastConnexion: '',
   tokens: []
+}
+let userSociety = {
+  _id: id,
+  nom: name + ' ' + lastname,
+  mail: username,
+  poste: ''
 }
 let société = {
   _id: '7d35cdad-830f-4efb-bce2-1cc5d60b019e',
@@ -52,7 +65,7 @@ let société = {
   city: 'Paris',
   country: 'France',
   siret: '75332382300025',
-  team: []
+  team: [userSociety]
 }
 
 // Connect to the db

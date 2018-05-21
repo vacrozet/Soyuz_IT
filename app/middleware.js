@@ -32,7 +32,9 @@ module.exports = (role) => {
           mail: result[0].mail,
           prenom: result[0].prenom,
           nom: result[0].nom,
-          poste: result[0].poste
+          poste: result[0].poste,
+          admin: result[0].admin,
+          idSociety: result[0].idSociety
         }
         next()
       })

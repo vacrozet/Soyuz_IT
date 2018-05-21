@@ -61,7 +61,6 @@ class AddUser extends Component {
           this.setState({loading: false})
         }
       }).catch((err) => {
-        console.log(err.response)
         store.openDialogInfo(true, 'Erreur', err.response)
         this.setState({loading: false})
       })
@@ -109,7 +108,7 @@ class AddUser extends Component {
                   onChange={this.handleChangeSelect}
                 >
                   {this.state.society ? this.state.society.map((res, index) => {
-                    return (<MenuItem key={index} checked={false} value={res._id} primaryText={res.name} />)
+                    return (<MenuItem key={index} checked={false} value={res} primaryText={res.name} />)
                   }) : null }
                 </SelectField>
                 <TextField

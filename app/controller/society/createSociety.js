@@ -11,6 +11,7 @@ function response (res, code, bool, message) {
 }
 
 module.exports = (req, res) => {
+  if (req.user.admin !== true) return response(res, 400, false, 'Accès non autorisé')
   if (req.body.name === '') return response(res, 400, false, 'Nom de group Incorrect')
   if (req.body.nameOfSociety === '') return response(res, 400, false, 'Nom société Incorrect')
   if (req.body.adresse === '') return response(res, 400, false, 'Adresse Incorrect')

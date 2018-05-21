@@ -36,7 +36,7 @@ class MenuIL extends Component {
           <ListItem primaryText='Utilisateurs' hoverColor='#fbbc05' leftIcon={<Lists />}
           onClick={() => {
             store.drowerAppBar(false)
-            this.props.history.push('/add-user')
+            this.props.history.push('/liste-users')
           }}
           />
           <ListItem primaryText='Ajouté Société' hoverColor='#fbbc05' leftIcon={<GroupAdd />}

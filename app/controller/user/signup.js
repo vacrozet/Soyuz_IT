@@ -14,7 +14,7 @@ function response (res, code, bool, message) {
 }
 
 module.exports = (req, res) => {
-  if (!req.body.idSociety.match(/^[A-F\d]{8}-[A-F\d]{4}-4[A-F\d]{3}-[89AB][A-F\d]{3}-[A-F\d]{12}$/i)) return response(res, 400, false, 'id society Incorect')
+  if (!req.body.idSociety._id.match(/^[A-F\d]{8}-[A-F\d]{4}-4[A-F\d]{3}-[89AB][A-F\d]{3}-[A-F\d]{12}$/i)) return response(res, 400, false, 'id society Incorect')
   if (!validator.isEmail(req.body.mail)) return response(res, 400, false, 'Email incorrect')
   if (!validator.isAlpha(req.body.prenom, ['fr-FR'])) return response(res, 400, false, 'Prenom incorrect')
   req.body.prenom = req.body.prenom[0].toUpperCase() + req.body.prenom.substring(1).toLowerCase()
@@ -26,7 +26,7 @@ module.exports = (req, res) => {
       if (err) return response(res, 500, false, 'Internal Server Error')
       if (resultUser.length !== 0) return response(res, 200, false, 'Utilisateur déjà présent')
       let admin = false
-      if (req.body.idSociety === '7d35cdad-830f-4efb-bce2-1cc5d60b019e') admin = true
+      if (req.body.idSociety._id === '7d35cdad-830f-4efb-bce2-1cc5d60b019e') admin = true
       let id = uuid()
       let user = {
         _id: id,
@@ -35,6 +35,8 @@ module.exports = (req, res) => {
         admin: admin,
         prenom: req.body.prenom,
         nom: req.body.nom,
+        idSociety: req.body.idSociety._id,
+        nameSociety: req.body.idSociety.name,
         poste: '',
         login: '',
         mail: req.body.mail,
@@ -45,6 +47,7 @@ module.exports = (req, res) => {
         tokens: []
       }
       let userSociety = {
+        _id: id,
         nom: req.body.prenom + ' ' + req.body.nom,
         mail: req.body.mail,
         poste: req.body.poste
@@ -54,7 +57,7 @@ module.exports = (req, res) => {
         if (error) return response(res, 500, false, 'Internal Server Error')
         if (result.result.ok !== 1) return response(res, 500, false, 'Internal Server Error')
       })
-      db.collection('Society').updateOne({_id: req.body.idSociety}, {
+      db.collection('Society').updateOne({_id: req.body.idSociety._id}, {
         $push: {team: userSociety}
       })
       nodemailer.createTestAccount((err, account) => {
