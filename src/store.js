@@ -8,10 +8,15 @@ class Store {
   @observable dialgTitle = ''
   @observable dialogText = ''
   @observable listeSelect = []
+  @observable admin = false
 
   @action
   logged (res) {
     this.login = res
+  }
+  @action
+  passAdmin (res) {
+    this.admin = res
   }
   @action
   drowerAppBar (res) {

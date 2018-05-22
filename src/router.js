@@ -16,9 +16,11 @@ import AddUser from './route/AddUser.js'
 import Settings from './route/Settings.js'
 import ChangePass from './route/ChangePass.js'
 import ListeUsers from './route/ListeUsers.js'
+import ListeSociety from './route/ListeSociety.js'
 
 import store from './store.js'
 import { observer } from 'mobx-react'
+import { local } from './utils/api';
 
 @observer
 class Router extends React.Component {
@@ -37,6 +39,11 @@ class Router extends React.Component {
     if (global.localStorage.getItem('token')) {
       store.logged(true)
     }
+    local().get('/user/info').then((res) => {
+      if (res.data.message.admin === true) store.passAdmin(true)
+    }).catch((err) => {
+      console.log(err)
+    })
   }
 
   render () {
@@ -62,7 +69,8 @@ class Router extends React.Component {
         <ForgetPass />
         <InfoDialog />
         <Switch>
-          <Route eact path='/liste-users' component={ListeUsers} />
+          <Route exact path='/liste-society' component={ListeSociety} />
+          <Route exact path='/liste-users' component={ListeUsers} />
           <Route exact path='/settings' component={Settings} />
           <Route exact path='/settings/changepass' component={ChangePass} />
           <Route exact path='/add-user' component={AddUser} />

@@ -30,31 +30,41 @@ class MenuIL extends Component {
             disabled
           />
           <Divider />
-          <ListItem primaryText='Ajouté utilisateur' hoverColor='#fbbc05' leftIcon={<PersonAdd />}
-          onClick={() => {
-            store.drowerAppBar(false)
-            this.props.history.push('/add-user')
-          }}
-          />
-          <ListItem primaryText='Utilisateurs' hoverColor='#fbbc05' leftIcon={<Lists />}
-          onClick={() => {
-            store.drowerAppBar(false)
-            this.props.history.push('/liste-users')
-          }}
-          />
-          <ListItem primaryText='Ajouté Société' hoverColor='#fbbc05' leftIcon={<GroupAdd />}
-            onClick={() => {
-              store.drowerAppBar(false)
-              this.props.history.push('/add-society')
-            }}
-          />
-          <ListItem primaryText='Sociétés' hoverColor='#fbbc05' leftIcon={<Lists />}
-          onClick={() => {
-            store.drowerAppBar(false)
-            this.props.history.push('/add-user')
-          }}
-          />
-          <Divider />
+          {store.admin ? (
+            <ListItem primaryText='Ajouté utilisateur' hoverColor='#fbbc05' leftIcon={<PersonAdd />}
+              onClick={() => {
+                store.drowerAppBar(false)
+                this.props.history.push('/add-user')
+              }}
+            />
+          ) : null}
+          {store.admin ? (
+            <ListItem primaryText='Utilisateurs' hoverColor='#fbbc05' leftIcon={<Lists />}
+              onClick={() => {
+                store.drowerAppBar(false)
+                this.props.history.push('/liste-users')
+              }}
+            />
+          ) : null}
+          {store.admin ? (
+            <ListItem primaryText='Ajouté Société' hoverColor='#fbbc05' leftIcon={<GroupAdd />}
+              onClick={() => {
+                store.drowerAppBar(false)
+                this.props.history.push('/add-society')
+              }}
+            />
+          ) : null}
+          {store.admin ? (
+            <ListItem primaryText='Sociétés' hoverColor='#fbbc05' leftIcon={<Lists />}
+              onClick={() => {
+                store.drowerAppBar(false)
+                this.props.history.push('/liste-society')
+              }}
+            />
+          ) : null}
+          {store.admin ? (
+            <Divider />
+          ) : null}
           <ListItem primaryText='Settings' hoverColor='#fbbc05' leftIcon={<Settings />} 
           onClick={() => {
             store.drowerAppBar(false)

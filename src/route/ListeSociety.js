@@ -1,20 +1,31 @@
 import React, { Component } from 'react'
-import '../css/ListeUser.css'
 import { local } from '../utils/api'
+import '../css/ListeSociety.css'
 import { Table, TableHeader, TableFooter, TableRow, TableRowColumn, TableHeaderColumn, TableBody } from 'material-ui/Table'
 import RaisedButton from 'material-ui/RaisedButton'
-import Trash from 'material-ui/svg-icons/action/delete'
 
-class ListeUsers extends Component {
+import Trash from 'material-ui/svg-icons/action/delete'
+import Settings from 'material-ui/svg-icons/action/settings'
+
+class ListeSociety extends Component {
   constructor (props) {
     super(props)
     this.state = {
       liste: []
     }
   }
+
   handleActualise () {
-    local().get('/user/allusers').then((res) => {
+    local().get('/society/allsociety').then((res) => {
       if (res.data.success === true) this.setState({liste: res.data.message})
+    }).catch((err) => {
+      console.log(err)
+    })
+  }
+
+  handleDelete (id) {
+    local().delete(`/society/delete/${id}`).then((res) => {
+      if (res.data.success) this.handleActualise()
     }).catch((err) => {
       console.log(err)
     })
@@ -24,26 +35,18 @@ class ListeUsers extends Component {
     this.handleActualise()
   }
 
-  handleDeleteUser (id, idSociety) {
-    local().delete(`/user/delete/${id}/${idSociety}`).then((res) => {
-      if (res.data.success === true) this.handleActualise()
-    }).catch((err) => {
-      console.log(err)
-    })
-  }
-
   render () {
     return (
-      <div className='bodyListeUsers'>
+      <div className='bodyListeSociety'>
         <center>
           <form>
-            <RaisedButton label='Ajout utilisateur' primary style={{margin: 12}}
+            <RaisedButton label='Ajouté Société' primary style={{margin: 12}}
               onClick={() => {
-                this.props.history.push('/add-user')
+                this.props.history.push('/add-society')
               }}
             />
           </form>
-          <h5>Supprimer un utilisateur, le supprimera de touts les projets ainsi que tout ces historiques.</h5>
+          <h5>Supprimer une société, supprimera de tout ces Utilisateurs.</h5>
         </center>
         <Table
           fixedHeader
@@ -62,11 +65,11 @@ class ListeUsers extends Component {
               </TableHeaderColumn>
             </TableRow>
             <TableRow>
-              <TableHeaderColumn tooltip='Société'>Société</TableHeaderColumn>
-              <TableHeaderColumn tooltip='Name'>Name</TableHeaderColumn>
-              <TableHeaderColumn tooltip='Poste'>Poste</TableHeaderColumn>
-              <TableHeaderColumn tooltip='Mail'>Mail</TableHeaderColumn>
-              <TableHeaderColumn tooltip='Delete'>Delete</TableHeaderColumn>
+              <TableHeaderColumn tooltip='Société'>Libelé</TableHeaderColumn>
+              <TableHeaderColumn tooltip='Name'>Nom</TableHeaderColumn>
+              <TableHeaderColumn tooltip='Poste'>Ville</TableHeaderColumn>
+              <TableHeaderColumn tooltip='Mail'>Nb d'employé</TableHeaderColumn>
+              <TableHeaderColumn tooltip='Delete'>Modifier</TableHeaderColumn>
             </TableRow>
           </TableHeader>
           <TableBody
@@ -77,16 +80,19 @@ class ListeUsers extends Component {
           >
             {this.state.liste.map((row, index) => (
               <TableRow key={index}>
-                <TableRowColumn>{row.nameSociety}</TableRowColumn>
-                <TableRowColumn>{row.prenom + ' ' + row.nom}</TableRowColumn>
-                <TableRowColumn>{row.poste}</TableRowColumn>
-                <TableRowColumn>{row.mail}</TableRowColumn>
-                <TableRowColumn>{<Trash
-                  style={{cursor: 'pointer', position: 'center'}}
+                <TableRowColumn>{row.name}</TableRowColumn>
+                <TableRowColumn>{row.nameOfSociety}</TableRowColumn>
+                <TableRowColumn>{row.city}</TableRowColumn>
+                <TableRowColumn>{row.team.length}</TableRowColumn>
+                <TableRowColumn>{<span><Trash
+                  style={{margin: 2, cursor: 'pointer'}}
+                  onClick={() => { this.handleDelete(row._id) }}
+                /><Settings
+                  style={{margin: 2, cursor: 'pointer'}}
                   onClick={() => {
-                    this.handleDeleteUser(row._id, row.idSociety)
+                    this.props.history.push(`/settings/${row._id}`)
                   }}
-                />}</TableRowColumn>
+                /></span>}</TableRowColumn>
               </TableRow>
             ))}
           </TableBody>
@@ -94,11 +100,11 @@ class ListeUsers extends Component {
             adjustForCheckbox={false}
           >
             <TableRow>
-              <TableRowColumn>Société</TableRowColumn>
-              <TableRowColumn>Name</TableRowColumn>
-              <TableHeaderColumn>Poste</TableHeaderColumn>
-              <TableRowColumn>Mail</TableRowColumn>
-              <TableRowColumn>Delete</TableRowColumn>
+              <TableRowColumn>Libelé</TableRowColumn>
+              <TableRowColumn>Nom</TableRowColumn>
+              <TableHeaderColumn>Ville</TableHeaderColumn>
+              <TableRowColumn>Nb d'employé</TableRowColumn>
+              <TableRowColumn>Modifier</TableRowColumn>
             </TableRow>
             <TableRow>
               <TableRowColumn colSpan='5' style={{textAlign: 'center'}}>
@@ -112,4 +118,4 @@ class ListeUsers extends Component {
   }
 }
 
-export default ListeUsers
+export default ListeSociety
