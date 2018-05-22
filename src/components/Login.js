@@ -3,7 +3,7 @@ import FlatButton from 'material-ui/FlatButton'
 import Dialog from 'material-ui/Dialog';
 import TextField from 'material-ui/TextField'
 import { local } from '../utils/api.js'
-import store from '../store.js'
+import store from '../utils/store.js'
 import { observer } from 'mobx-react'
 
 @observer
@@ -35,6 +35,7 @@ class Login extends React.Component {
             this.setState({open: !this.state.open}, () => {
               global.localStorage.setItem('token', res.data.token)
               store.logged(res.data.success)
+              store.passAdmin(res.data.admin)
             })
           }
         }).catch((err) => {

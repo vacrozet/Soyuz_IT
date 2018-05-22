@@ -27,22 +27,6 @@ class Store {
     this.dialogPassword = res
   }
   @action
-  addListe (row) {
-    let capteur = false
-    this.listeSelect.forEach(element => {
-      if (element === row) {
-        capteur = true
-      }
-    })
-    if (capteur === false) this.listeSelect.push(row)
-    else {
-      for (let index = 0; index < this.listeSelect.length; index++) {
-        if (this.listeSelect[index] === row) this.listeSelect[index] = ''
-      }
-      this.listeSelect = this.listeSelect.filter(word => word !== '')
-    }
-  }
-  @action
   openDialogInfo (open, title, text) {
     this.dialogOpen = open
     this.dialogTitle = title

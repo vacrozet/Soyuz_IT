@@ -4,7 +4,7 @@ import {List, ListItem} from 'material-ui/List'
 import Lock from 'material-ui/svg-icons/action/lock'
 import Clear from 'material-ui/svg-icons/content/clear'
 import Divider from 'material-ui/Divider'
-import store from '../store.js'
+import store from '../utils/store.js'
 import { observer } from 'mobx-react'
 
 @observer

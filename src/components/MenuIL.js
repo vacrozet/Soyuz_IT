@@ -11,7 +11,7 @@ import Lists from 'material-ui/svg-icons/action/list'
 import Lock from 'material-ui/svg-icons/action/lock'
 import PowerSettingsNew from 'material-ui/svg-icons/action/power-settings-new'
 
-import store from '../store.js'
+import store from '../utils/store.js'
 import { observer } from 'mobx-react'
 
 @observer

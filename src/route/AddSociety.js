@@ -4,7 +4,7 @@ import { local } from '../utils/api.js'
 import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
 import Paper from 'material-ui/Paper'
-import store from '../store.js'
+import store from '../utils/store.js'
 import { observer } from 'mobx-react'
 
 @observer

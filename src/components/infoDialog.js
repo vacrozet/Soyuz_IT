@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import FlatButton from 'material-ui/FlatButton'
 import Dialog from 'material-ui/Dialog'
-import store from '../store.js'
+import store from '../utils/store.js'
 import { observer } from 'mobx-react'
 
 @observer

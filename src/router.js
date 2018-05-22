@@ -19,7 +19,7 @@ import ListeUsers from './route/ListeUsers.js'
 import ListeSociety from './route/ListeSociety.js'
 import SettingsSociety from './route/SettingsSociety'
 
-import store from './store.js'
+import store from './utils/store.js'
 import { observer } from 'mobx-react'
 import { local } from './utils/api';
 

@@ -2,7 +2,7 @@ import React from 'react'
 import MenuItem from 'material-ui/MenuItem'
 import IconButton from 'material-ui/IconButton'
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert'
-import store from '../store.js'
+import store from '../utils/store.js'
 import { observer } from 'mobx-react'
 import IconMenu from 'material-ui/IconMenu'
 

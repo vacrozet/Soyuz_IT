@@ -3,7 +3,10 @@ import { local } from '../utils/api'
 import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
 import '../css/SettingsSociety.css'
+import store from '../utils/store.js'
+import { observer } from 'mobx-react'
 
+@observer
 class SettingsSociety extends Component {
   constructor (props) {
     super(props)
@@ -33,7 +36,10 @@ class SettingsSociety extends Component {
         country: this.state.country,
         siret: this.state.siret
       }).then((res) => {
-        if (res.data.success === true) this.handleActualise()
+        if (res.data.success === true) {
+          this.handleActualise()
+          store.openDialogInfo(true, 'Succès', res.data.message)
+        }
       }).catch((err) => {
         console.log(err)
       })

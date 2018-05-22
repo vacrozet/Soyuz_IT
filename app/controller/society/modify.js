@@ -27,6 +27,6 @@ module.exports = (req, res) => {
         siret: req.body.siret
       }
     })
-    return response(res, 200, true, 'Succès')
+    return response(res, 200, true, 'Données modifié')
   })
 }

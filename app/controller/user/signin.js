@@ -35,6 +35,7 @@ module.exports = (req, res) => {
         return res.json({
           success: true,
           message: 'Connexion reussie',
+          admin: results.admin,
           lock: results[0].lock,
           token: objToken.token
         })
