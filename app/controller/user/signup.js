@@ -38,7 +38,7 @@ module.exports = (req, res) => {
         nom: req.body.nom,
         idSociety: req.body.idSociety._id,
         nameSociety: req.body.idSociety.name,
-        poste: '',
+        poste: req.body.poste,
         login: '',
         mail: req.body.mail,
         passwd: bcrypt.hashSync(newPass, 10),

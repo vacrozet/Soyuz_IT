@@ -2,32 +2,30 @@ import React, { Component } from 'react'
 import { local } from '../utils/api'
 import { Table, TableHeader, TableFooter, TableRow, TableRowColumn, TableHeaderColumn, TableBody } from 'material-ui/Table'
 import RaisedButton from 'material-ui/RaisedButton'
-import store from '../store.js'
-import { observer } from 'mobx-react'
+import Trash from 'material-ui/svg-icons/action/delete'
 
-@observer
 class ListeUsers extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      liste: [],
+      liste: []
     }
   }
-
-  componentWillMount () {
+  handleActualise () {
     local().get('/user/allusers').then((res) => {
       if (res.data.success === true) this.setState({liste: res.data.message})
     }).catch((err) => {
       console.log(err)
     })
   }
-  handleCellClick (row, column, event) {
-    store.addListe(this.state.liste[row]._id)
+
+  componentWillMount () {
+    this.handleActualise()
   }
-  handleDeleteUser () {
-    console.log(store.listeSelect)
-    local().delete(`/user/delete/${store.listeSelect}`).then((res) => {
-      console.log(res)
+
+  handleDeleteUser (id, idSociety) {
+    local().delete(`/user/delete/${id}/${idSociety}`).then((res) => {
+      if (res.data.success === true) this.handleActualise()
     }).catch((err) => {
       console.log(err)
     })
@@ -38,32 +36,27 @@ class ListeUsers extends Component {
       <div className='bodyListeUsers'>
         <center>
           <form>
-          <RaisedButton label="Ajout utilisateur" primary={true} style={{margin: 12}}
-            onClick={() => {
-              this.props.history.push('/add-user')
-            }}
-          />
-          <RaisedButton label="Supprimer utilisateur" style={{margin: 12}}
-            onClick={() => {
-              this.handleDeleteUser()
-            }}
-          />
+            <RaisedButton label="Ajout utilisateur" primary={true} style={{margin: 12}}
+              onClick={() => {
+                this.props.history.push('/add-user')
+              }}
+            />
           </form>
+          <h5>Supprimer un utilisateur, le supprimera de touts les projets ainsi que tout ces historiques.</h5>
         </center>
         <Table
           fixedHeader
           fixedFooter
-          selectable
-          multiSelectable
-          onCellClick={this.handleCellClick.bind(this)}
+          selectable={false}
+          multiSelectable={false}
         >
           <TableHeader
             displaySelectAll={false}
-            adjustForCheckbox
+            adjustForCheckbox={false}
             enableSelectAll
           >
             <TableRow>
-              <TableHeaderColumn colSpan='4' tooltip='Liste Utilisateurs' style={{textAlign: 'center'}}>
+              <TableHeaderColumn colSpan='5' tooltip='Liste Utilisateurs' style={{textAlign: 'center'}}>
                 Liste Utilisateurs
               </TableHeaderColumn>
             </TableRow>
@@ -72,34 +65,42 @@ class ListeUsers extends Component {
               <TableHeaderColumn tooltip='Name'>Name</TableHeaderColumn>
               <TableHeaderColumn tooltip='Poste'>Poste</TableHeaderColumn>
               <TableHeaderColumn tooltip='Mail'>Mail</TableHeaderColumn>
+              <TableHeaderColumn tooltip='Delete'>Delete</TableHeaderColumn>
             </TableRow>
           </TableHeader>
           <TableBody
-            displayRowCheckbox
+            displayRowCheckbox={false}
             deselectOnClickaway={false}
             showRowHover
             stripedRows={false}
           >
             {this.state.liste.map((row, index) => (
               <TableRow key={index}>
-                <TableRowColumn tooltip='Société'>{row.nameSociety}</TableRowColumn>
-                <TableRowColumn tooltip='Nom'>{row.prenom + ' ' + row.nom}</TableRowColumn>
-                <TableRowColumn tooltip='Poste'>{row.poste}</TableRowColumn>
-                <TableRowColumn tooltip='Mail'>{row.mail}</TableRowColumn>
+                <TableRowColumn>{row.nameSociety}</TableRowColumn>
+                <TableRowColumn>{row.prenom + ' ' + row.nom}</TableRowColumn>
+                <TableRowColumn>{row.poste}</TableRowColumn>
+                <TableRowColumn>{row.mail}</TableRowColumn>
+                <TableRowColumn>{<Trash
+                  style={{cursor: 'pointer', position: 'center'}}
+                  onClick={() => {
+                    this.handleDeleteUser(row._id, row.idSociety)
+                  }}
+                  />}</TableRowColumn>
               </TableRow>
             ))}
           </TableBody>
           <TableFooter
-            adjustForCheckbox
+            adjustForCheckbox={false}
           >
             <TableRow>
               <TableRowColumn>Société</TableRowColumn>
               <TableRowColumn>Name</TableRowColumn>
               <TableHeaderColumn>Poste</TableHeaderColumn>
               <TableRowColumn>Mail</TableRowColumn>
+              <TableRowColumn>Delete</TableRowColumn>
             </TableRow>
             <TableRow>
-              <TableRowColumn colSpan='4' style={{textAlign: 'center'}}>
+              <TableRowColumn colSpan='5' style={{textAlign: 'center'}}>
                 Liste Utilisateurs
               </TableRowColumn>
             </TableRow>

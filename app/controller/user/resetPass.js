@@ -13,8 +13,8 @@ function response (res, code, bool, message) {
 }
 
 module.exports = (req, res) => {
-if (validator.isEmail(req.body.mail)) {
-  db.get().then((db) => {
+  if (validator.isEmail(req.body.mail)) {
+    db.get().then((db) => {
       db.collection('Users').find({mail: req.body.mail}).toArray((err, result) => {
         if (err) return response(res, 204, false, 'Mail incorrect')
         if (result.length === 1) {
@@ -30,7 +30,6 @@ if (validator.isEmail(req.body.mail)) {
                 pass: 'soyuzdigital' // generated ethereal password
               }
             })
-    
             // setup email data with unicode symbols
             let mailOptions = {
               from: '"Soyuz Test Send Mail" <projecttestnodemailer@gmail.com>', // sender address
