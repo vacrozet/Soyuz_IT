@@ -17,6 +17,7 @@ import Settings from './route/Settings.js'
 import ChangePass from './route/ChangePass.js'
 import ListeUsers from './route/ListeUsers.js'
 import ListeSociety from './route/ListeSociety.js'
+import SettingsSociety from './route/SettingsSociety'
 
 import store from './store.js'
 import { observer } from 'mobx-react'
@@ -71,6 +72,7 @@ class Router extends React.Component {
         <Switch>
           <Route exact path='/liste-society' component={ListeSociety} />
           <Route exact path='/liste-users' component={ListeUsers} />
+          <Route exact path='/settings/:idSociety' component={SettingsSociety} />
           <Route exact path='/settings' component={Settings} />
           <Route exact path='/settings/changepass' component={ChangePass} />
           <Route exact path='/add-user' component={AddUser} />
