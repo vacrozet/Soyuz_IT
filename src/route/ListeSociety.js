@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { local } from '../utils/api'
 import '../css/ListeSociety.css'
+
 import { Table, TableHeader, TableFooter, TableRow, TableRowColumn, TableHeaderColumn, TableBody } from 'material-ui/Table'
 import RaisedButton from 'material-ui/RaisedButton'
-
 import Trash from 'material-ui/svg-icons/action/delete'
 import Settings from 'material-ui/svg-icons/action/settings'
 

@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import { local } from '../utils/api'
+import '../css/SettingsSociety.css'
+
 import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
-import '../css/SettingsSociety.css'
+
 import store from '../utils/store.js'
 import { observer } from 'mobx-react'
 
