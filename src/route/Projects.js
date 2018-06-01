@@ -94,7 +94,7 @@ class Projects extends Component {
                 <IconMenu iconButtonElement={iconButtonElement}>
                   <MenuItem
                   onClick={() => {
-                    console.log(res._id)
+                    this.props.history.push(`/new-project/${res._id}`)
                   }}>Ajouter un projet</MenuItem>
                 </IconMenu>
               }

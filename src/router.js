@@ -20,6 +20,7 @@ import ListeSociety from './route/ListeSociety.js'
 import SettingsSociety from './route/SettingsSociety'
 import NewProject from './route/NewProject'
 import Projects from './route/Projects'
+import NewProjectInCat from './route/NewProjectInCat'
 
 import store from './utils/store.js'
 import { observer } from 'mobx-react'
@@ -83,6 +84,7 @@ class Router extends React.Component {
           <Route exact path='/settings' component={Settings} />
           <Route exact path='/add-user' component={AddUser} />
           <Route exact path='/add-society' component={AddSociety} />
+          <Route exact path='/new-project/:idCat' component={NewProjectInCat} />
           <Route exact path='/new-project' component={NewProject} />
           <Route path='/' component={Accueil} />
         </Switch>
