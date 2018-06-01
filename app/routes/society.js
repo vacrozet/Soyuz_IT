@@ -8,5 +8,6 @@ router.get('/allsociety', middle('USER'), require('../controller/society/allSoci
 router.delete('/delete/:id', middle('USER'), require('../controller/society/deleteSociety.js'))
 router.get('/info/:idSociety', middle('USER'), require('../controller/society/info.js'))
 router.post('/modify', middle('USER'), require('../controller/society/modify.js'))
+router.get('/alluser', middle('USER'), require('../controller/society/alluser.js'))
 
 module.exports = router

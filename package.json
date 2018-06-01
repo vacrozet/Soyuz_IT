@@ -44,6 +44,7 @@
     "material-ui-icons": "^1.0.0-beta.36",
     "mobx": "^4.2.1",
     "mobx-react": "^5.1.2",
+    "moment": "^2.22.1",
     "mongodb": "^2.2.33",
     "nodemailer": "^4.6.4",
     "object-assign": "4.1.1",

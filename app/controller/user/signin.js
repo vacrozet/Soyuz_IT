@@ -36,7 +36,7 @@ module.exports = (req, res) => {
           success: true,
           message: 'Connexion reussie',
           admin: results.admin,
-          lock: results[0].lock,
+          prenom: results[0].prenom,
           token: objToken.token
         })
       }).catch((err1) => { return erreur(res, 409, false, 'erreur requete') })

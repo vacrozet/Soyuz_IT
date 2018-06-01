@@ -36,6 +36,7 @@ class Login extends React.Component {
               global.localStorage.setItem('token', res.data.token)
               store.logged(res.data.success)
               store.passAdmin(res.data.admin)
+              store.nameLogged(res.data.prenom)
             })
           }
         }).catch((err) => {

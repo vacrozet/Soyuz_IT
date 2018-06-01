@@ -14,6 +14,7 @@ function response (res, code, bool, message) {
 }
 
 module.exports = (req, res) => {
+  console.log(req.body)
   if (req.user.admin !== true) return response(res, 200, false, 'Accès Non Autorisé')
   if (!req.body.idSociety._id.match(/^[A-F\d]{8}-[A-F\d]{4}-4[A-F\d]{3}-[89AB][A-F\d]{3}-[A-F\d]{12}$/i)) return response(res, 400, false, 'id society Incorect')
   if (!validator.isEmail(req.body.mail)) return response(res, 400, false, 'Email incorrect')

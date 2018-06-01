@@ -60,7 +60,8 @@ class AddUser extends Component {
           this.setState({loading: false})
         }
       }).catch((err) => {
-        store.openDialogInfo(true, 'Erreur', err.response)
+        store.openDialogInfo(true, 'Erreur', err)
+        console.log(err)
         this.setState({loading: false})
       })
     }
@@ -68,6 +69,7 @@ class AddUser extends Component {
 
   handleKeyPress (evt) {
     if (evt.key === 'Enter') {
+      console.log(this.state)
       this.handleSignup()
     }
   }

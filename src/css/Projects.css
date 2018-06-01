@@ -1,0 +1,19 @@
+.bodyProjects {
+  height: calc(100vh - 50px);
+  width: 100vw;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+}
+.bodyProjects > .firstPart {
+  height: 100px;
+  width: 100%;
+  display: flex;
+}
+.bodyProjects > .firstPart > .formulaire {
+  margin: auto;
+}
+
+.bodyProjects > .secondPart {
+  padding: 10px 30px;
+}

@@ -9,6 +9,7 @@ import PersonAdd from 'material-ui/svg-icons/social/person-add'
 import GroupAdd from 'material-ui/svg-icons/social/group-add'
 import Lists from 'material-ui/svg-icons/action/list'
 import Lock from 'material-ui/svg-icons/action/lock'
+import Add from 'material-ui/svg-icons/content/add'
 import PowerSettingsNew from 'material-ui/svg-icons/action/power-settings-new'
 
 import store from '../utils/store.js'
@@ -26,9 +27,26 @@ class MenuIL extends Component {
       <MobileTearSheet>
         <List>
           <ListItem
-            primaryText="valentin"
+            primaryText={store.nameLogin}
             disabled
           />
+          <Divider />
+          {!store.admin ? (
+            <ListItem primaryText='Nouveau Projet' hoverColor='#fbbc05' leftIcon={<Add />}
+              onClick={() => {
+                store.drowerAppBar(false)
+                this.props.history.push('/new-project')
+              }}
+            />
+          ) : null}
+          {!store.admin ? (
+            <ListItem primaryText='Projets' hoverColor='#fbbc05' leftIcon={<Lists />}
+              onClick={() => {
+                store.drowerAppBar(false)
+                this.props.history.push('/projects')
+              }}
+            />
+          ) : null}
           <Divider />
           {store.admin ? (
             <ListItem primaryText='Ajouté utilisateur' hoverColor='#fbbc05' leftIcon={<PersonAdd />}
@@ -81,6 +99,8 @@ class MenuIL extends Component {
             onClick={() => {
               store.logged(false)
               store.drowerAppBar(false)
+              store.passAdmin(false)
+              store.nameLogged('')
               global.localStorage.removeItem('token')
               this.props.history.push('/')
             }}

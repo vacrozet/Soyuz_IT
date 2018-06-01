@@ -18,10 +18,13 @@ import ChangePass from './route/ChangePass.js'
 import ListeUsers from './route/ListeUsers.js'
 import ListeSociety from './route/ListeSociety.js'
 import SettingsSociety from './route/SettingsSociety'
+import NewProject from './route/NewProject'
+import Projects from './route/Projects'
 
 import store from './utils/store.js'
 import { observer } from 'mobx-react'
 import { local } from './utils/api';
+import AddCategorie from './components/AddCategorie';
 
 @observer
 class Router extends React.Component {
@@ -42,6 +45,7 @@ class Router extends React.Component {
     }
     local().get('/user/info').then((res) => {
       if (res.data.message.admin === true) store.passAdmin(true)
+      store.nameLogged(res.data.message.prenom)
     }).catch((err) => {
       console.log(err)
     })
@@ -69,14 +73,17 @@ class Router extends React.Component {
         </Drawer>
         <ForgetPass />
         <InfoDialog />
+        <AddCategorie />
         <Switch>
+          <Route exact path='/projects' component={Projects} />
           <Route exact path='/liste-society' component={ListeSociety} />
           <Route exact path='/liste-users' component={ListeUsers} />
+          <Route exact path='/settings/changepass' component={ChangePass} />
           <Route exact path='/settings/:idSociety' component={SettingsSociety} />
           <Route exact path='/settings' component={Settings} />
-          <Route exact path='/settings/changepass' component={ChangePass} />
           <Route exact path='/add-user' component={AddUser} />
           <Route exact path='/add-society' component={AddSociety} />
+          <Route exact path='/new-project' component={NewProject} />
           <Route path='/' component={Accueil} />
         </Switch>
       </div>

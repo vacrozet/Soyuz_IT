@@ -1,0 +1,25 @@
+.bodyNewProject {
+  height: calc(100vh - 50px);
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  overflow: auto;
+}
+.bodyNewProject > .firstPartie {
+  width: 50%;
+  height: 100%;
+  display: flex;
+}
+.bodyNewProject > .secondPartie {
+  width: 50%;
+  height: 100%;
+  display: flex;
+}
+.bodyNewProject > .firstPartie > .formOne{
+  margin: auto;
+  width: auto;
+  height: auto;
+}
+.bodyNewProject > .secondPartie > .formTwo{
+  margin: auto;
+}
