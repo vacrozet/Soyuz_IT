@@ -21,9 +21,8 @@ class Settings extends Component {
     }
   }
 
-  handleChange (evt) {
-    this.setState({[evt.target.name]: evt.target.value})
-  }
+  handleChange (evt) { this.setState({[evt.target.name]: evt.target.value}) }
+  handleKeyPress (evt) { if (evt.key === 'Enter') { this.handleModify() } }
 
   handleModify () {
     if (validator.isEmail(this.state.mail)) {
@@ -34,18 +33,10 @@ class Settings extends Component {
         poste: this.state.poste
       }).then((res) => {
         if (res.data.success === true) store.openDialogInfo(true, 'Accepté', res.data.message)
-      }).catch((err) => {
-        store.openDialogInfo(true, 'Erreur', err.response.message)
-      })
+      }).catch((err) => { store.openDialogInfo(true, 'Erreur', err.response) })
     }
   }
   
-  handleKeyPress (evt) {
-    if (evt.key === 'Enter') {
-      this.handleModify()
-    }
-  }
-
   componentWillMount () {
     local().get('/user/info').then((res) => {
       if (res.data.success === true) this.setState({
@@ -54,9 +45,7 @@ class Settings extends Component {
         poste: res.data.message.poste,
         mail: res.data.message.mail
       })
-    }).catch((err) => {
-      console.log(err)
-    })
+    }).catch((err) => { console.log(err) })
   }
 
   render () {

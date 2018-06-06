@@ -25,9 +25,8 @@ class AddSociety extends Component {
     }
   }
 
-  handleChange (evt) {
-    this.setState({[evt.target.name]: evt.target.value})
-  }
+  handleChange (evt) { this.setState({[evt.target.name]: evt.target.value}) }
+  handleKeyPress (evt) { if (evt.key === 'Enter') { this.handleCreateSociety() } }
 
   handleCreateSociety () {
     if (this.state.libelé !== '' &&
@@ -72,11 +71,6 @@ class AddSociety extends Component {
           siret: ''
         })
       })
-    }
-  }
-  handleKeyPress (evt) {
-    if (evt.key === 'Enter') {
-      this.handleCreateSociety()
     }
   }
 

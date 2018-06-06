@@ -7,7 +7,9 @@ import TextField from 'material-ui/TextField'
 import DatePicker from 'material-ui/DatePicker'
 import SelectField from 'material-ui/SelectField'
 import MenuItem from 'material-ui/MenuItem'
-import generator from 'generate-password'
+import RaisedButton from 'material-ui/RaisedButton'
+// import FormData from 'form-data'
+import Randomize from 'randomatic'
 
 function formatDate (date) {
   var d = date
@@ -32,9 +34,10 @@ class NewProjectInCat extends Component {
       deadLine: '',
       type: ['Traduction', 'Relecture', 'copywriting'],
       valueSelect: '',
+      refSociety: '',
+      ref: Randomize('0', '5'),
       listUsers: '',
       values: [],
-      ref: generator.generate({length: 15, uppercase: true, numbers: true}),
       langueStart: '',
       otherLangueStart: '',
       langueEnd: '',
@@ -46,11 +49,8 @@ class NewProjectInCat extends Component {
 
   componentWillMount () {
     local().get('/user/info').then((res) => {
-      if (res.data.success === true) {
-      }
-    }).catch((err) => {
-      console.log(err)
-    })
+      if (res.data.success === true) this.setState({refSociety: res.data.message.refSociety})
+    }).catch((err) => { console.log(err) })
     local().get(`/society/alluser`).then((res1) => {
       if (res1.data.success === true) {
         for (let index = 0; index < res1.data.message.length; index++) {
@@ -63,7 +63,6 @@ class NewProjectInCat extends Component {
     local().get(`/project/getonecategorie/${this.props.match.params.idCat}`).then((res2) => {
       if (res2.data.success !== true) this.props.history.push('/')
     }).catch((err2) => { console.log(err2) })
-    console.log(this.state.ref)
   }
 
   handleChangeCola (event, index, values) { this.setState({values: values}) }
@@ -74,6 +73,25 @@ class NewProjectInCat extends Component {
   handleChangeLangueRelecture (event, index, values) { this.setState({langueRelecture: values}) }
   handleKeyPress (evt) { if (evt.key === 'Enter') { console.log(this.state) } }
   handleChange (evt) { this.setState({[evt.target.name]: evt.target.value}) }
+
+  handleUploadFile (file) {
+    console.log(file.target.files[0])
+    const data = new FormData()
+    data.append('name', 'some value user types')
+    data.append('description', 'some value user types')
+    data.append('file', file.target.files[0])
+    console.log(data)
+    local().post('/doc/putdoc', data).then((res) => {
+      console.log(res)
+    }).catch((err) => {
+      console.log(err)
+    })
+    // const file = files[0];
+    // this.props.actions.uploadRequest({
+    //    file,
+    //    name: 'Awesome Cat Pic'
+    // })
+  }
 
   selectionRenderer (values) {
     switch (values.length) {
@@ -108,6 +126,12 @@ class NewProjectInCat extends Component {
               value={this.state.nameOfProject}
               onChange={this.handleChange.bind(this)}
               onKeyPress={this.handleKeyPress.bind(this)}
+            /><br />
+            <TextField
+              floatingLabelText='Ref du projet'
+              name='Ref du Projet'
+              value={this.state.refSociety + '/' + this.state.ref}
+              disabled
             /><br />
             {this.state.listUsers ? (
               <SelectField
@@ -210,7 +234,7 @@ class NewProjectInCat extends Component {
               <div>
                 <SelectField
                   multiple={false}
-                  hintText='Langue du text'
+                  hintText='Langue du texte'
                   value={this.state.langueRelecture}
                   onChange={this.handleChangeLangueRelecture.bind(this)}
                 >
@@ -235,6 +259,37 @@ class NewProjectInCat extends Component {
                 ) : null}
               </div>
             ) : null}
+            <RaisedButton label='Upload files' primary type='file'
+              onClick={() => {
+
+              }}
+              labelPosition='before'
+            >
+              <input type='file'
+                style={{
+                  cursor: 'pointer',
+                  position: 'absolute',
+                  top: 0,
+                  bottom: 0,
+                  right: 0,
+                  left: 0,
+                  width: '100%',
+                  opacity: 0}}
+                onChange={this.handleUploadFile.bind(this)}
+                accept='.jpg, .jpeg, .png, .mif, .indd, .idml, .psd, .csv, .dita, .ditamap, .msg, .eml,
+                .oft, .strings, .properties, .xls, .xlt, .xlsx, .xlsm, .xltx, .xltm, .xlsb, .ppt, .pot,
+                .pps, .pptx, .pptm, .potx, .potm, .ppsx, .ppsm, .doc, .docx, .dot, .dotx, .docm, .dotm,
+                .odt, .ods, .odp, .pdf, .txt, .utxt, .utf8, .text, .po, .pot, .rtf, .srt, .bak, .deu,
+                .eng, .fra, .ttx, .htm, .html, .xhtml, . htmls, .php, .php2, .php3, .php4, .php5,
+                .php6, .phtml, .csm, .jsp, .ahtm, .ahtml, .xlf, .sdlxliff, .xliff, .xlif'
+              />
+            </RaisedButton>
+            {this.state.fileUpload ? (
+              <div>
+                Files Upload:
+              </div>
+            ) : null}
+            {this.state.filesUpload ? null : null}
           </div>
         </div>
       </div>

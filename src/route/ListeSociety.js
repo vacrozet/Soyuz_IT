@@ -18,22 +18,16 @@ class ListeSociety extends Component {
   handleActualise () {
     local().get('/society/allsociety').then((res) => {
       if (res.data.success === true) this.setState({liste: res.data.message})
-    }).catch((err) => {
-      console.log(err)
-    })
+    }).catch((err) => { console.log(err) })
   }
 
   handleDelete (id) {
     local().delete(`/society/delete/${id}`).then((res) => {
       if (res.data.success) this.handleActualise()
-    }).catch((err) => {
-      console.log(err)
-    })
+    }).catch((err) => { console.log(err) })
   }
 
-  componentWillMount () {
-    this.handleActualise()
-  }
+  componentWillMount () { this.handleActualise() }
 
   render () {
     return (

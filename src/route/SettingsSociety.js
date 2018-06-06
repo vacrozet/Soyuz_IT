@@ -42,20 +42,14 @@ class SettingsSociety extends Component {
           this.handleActualise()
           store.openDialogInfo(true, 'Succès', res.data.message)
         }
-      }).catch((err) => {
-        console.log(err)
-      })
+      }).catch((err) => { console.log(err) })
     }
   }
 
-  handleChange (evt) {
-    this.setState({[evt.target.name]: evt.target.value})
-  }
-  handleKeyPress (evt) {
-    if (evt.key === 'Enter') {
-      this.handleModify()
-    }
-  }
+  handleChange (evt) { this.setState({[evt.target.name]: evt.target.value}) }
+  handleKeyPress (evt) { if (evt.key === 'Enter') { this.handleModify() } }
+  componentWillMount () { this.handleActualise() }
+
   handleActualise () {
     local().get(`/society/info/${this.props.match.params.idSociety}`).then((res) => {
       if (res.data.success === true) {
@@ -73,10 +67,6 @@ class SettingsSociety extends Component {
     }).catch((err) => {
       console.log(err)
     })
-  }
-
-  componentWillMount () {
-    this.handleActualise()
   }
 
   render () {

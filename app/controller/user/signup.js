@@ -38,6 +38,7 @@ module.exports = (req, res) => {
         prenom: req.body.prenom,
         nom: req.body.nom,
         idSociety: req.body.idSociety._id,
+        refSociety: req.body.idSociety.ref,
         nameSociety: req.body.idSociety.name,
         poste: req.body.poste,
         login: '',

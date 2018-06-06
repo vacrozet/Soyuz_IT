@@ -34,7 +34,8 @@ module.exports = (role) => {
           nom: result[0].nom,
           poste: result[0].poste,
           admin: result[0].admin,
-          idSociety: result[0].idSociety
+          idSociety: result[0].idSociety,
+          refSociety: result[0].refSociety
         }
         next()
       })

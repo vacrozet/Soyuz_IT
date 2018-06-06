@@ -31,14 +31,8 @@ class AddCategorie extends Component {
       })
     }
   }
-  handleChange (evt) {
-    this.setState({[evt.target.name]: evt.target.value})
-  }
-  handleKeyPress (evt) {
-    if (evt.key === 'Enter') {
-      this.handleSend()
-    }
-  }
+  handleChange (evt) { this.setState({[evt.target.name]: evt.target.value}) }
+  handleKeyPress (evt) { if (evt.key === 'Enter') { this.handleSend() } }
 
   render () {
     const actions = [

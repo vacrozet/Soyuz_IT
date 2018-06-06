@@ -18,9 +18,8 @@ class ForgetPass extends Component {
       disabledCTA: false
     }
   }
-  handleChange (evt) {
-    this.setState({[evt.target.name]: evt.target.value})
-  }
+  handleChange (evt) { this.setState({[evt.target.name]: evt.target.value}) }
+  handleKeyPress (evt) { if (evt.key === 'Enter') { this.handleConnexion() } }
   handleConnexion () {
     if (validator.isEmail(this.state.mail)) {
       this.setState({
@@ -54,11 +53,6 @@ class ForgetPass extends Component {
     }
   }
 
-  handleKeyPress (evt) {
-    if (evt.key === 'Enter') {
-      this.handleConnexion()
-    }
-  }
   render () {
     const actions = [
       <FlatButton

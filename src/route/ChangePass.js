@@ -18,15 +18,9 @@ class ChangePass extends Component {
       newPass1: ''
     }
   }
-  handleChange (evt) {
-    this.setState({[evt.target.name]: evt.target.value})
-  }
-
-  handleKeyPress (evt) {
-    if (evt.key === 'Enter') {
-      this.handleCahngePass()
-    }
-  }
+  handleChange (evt) { this.setState({[evt.target.name]: evt.target.value}) }
+  handleKeyPress (evt) { if (evt.key === 'Enter') { this.handleCahngePass() } }
+  
   handleCahngePass () {
     if (this.state.oldPass !== '' &&
     this.state.newPass !== '' &&

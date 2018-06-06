@@ -27,10 +27,8 @@ class AddUser extends Component {
   }
 
   handleChangeSelect = (event, index, values) => this.setState({values})
-
-  handleChange (evt) {
-    this.setState({[evt.target.name]: evt.target.value})
-  }
+  handleKeyPress (evt) { if (evt.key === 'Enter') { this.handleSignup() } }
+  handleChange (evt) { this.setState({[evt.target.name]: evt.target.value}) }
 
   handleSignup () {
     if (this.state.nom !== '' &&
@@ -64,13 +62,6 @@ class AddUser extends Component {
         console.log(err)
         this.setState({loading: false})
       })
-    }
-  }
-
-  handleKeyPress (evt) {
-    if (evt.key === 'Enter') {
-      console.log(this.state)
-      this.handleSignup()
     }
   }
 

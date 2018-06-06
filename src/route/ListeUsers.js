@@ -21,16 +21,12 @@ class ListeUsers extends Component {
     })
   }
 
-  componentWillMount () {
-    this.handleActualise()
-  }
+  componentWillMount () { this.handleActualise() }
 
   handleDeleteUser (id, idSociety) {
     local().delete(`/user/delete/${id}/${idSociety}`).then((res) => {
       if (res.data.success === true) this.handleActualise()
-    }).catch((err) => {
-      console.log(err)
-    })
+    }).catch((err) => { console.log(err) })
   }
 
   render () {

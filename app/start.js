@@ -42,6 +42,7 @@ let user = {
   mail: username,
   nameSociety: 'Soyuz',
   idSociety: '7d35cdad-830f-4efb-bce2-1cc5d60b019e',
+  refSociety: 'SOYUZ',
   poste: '',
   passwd: hash,
   path: '',
@@ -65,6 +66,7 @@ let société = {
   city: 'Paris',
   country: 'France',
   siret: '75332382300025',
+  ref: 'SOYUZ',
   team: [userSociety]
 }
 

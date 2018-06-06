@@ -39,9 +39,7 @@ class NewProject extends Component {
     local().get('/user/info').then((res) => {
       if (res.data.success === true) {
       }
-    }).catch((err) => {
-      console.log(err)
-    })
+    }).catch((err) => { console.log(err) })
     local().get(`/society/alluser`).then((res1) => {
       if (res1.data.success === true) {
         for (let index = 0; index < res1.data.message.length; index++) {
@@ -50,30 +48,14 @@ class NewProject extends Component {
         }
         this.setState({listUsers: res1.data.message})
       }
-    }).catch((err1) => {
-      console.log(err1)
-    })
+    }).catch((err1) => { console.log(err1) })
   }
 
-  handleChangeSelect (event, index, values) {
-    this.setState({valueSelect: values})
-  }
-
-  handleChange (evt) {
-    this.setState({[evt.target.name]: evt.target.value})
-  }
-
-  handleChangeDate (evt, date) {
-    this.setState({deadLine: formatDate(date)})
-  }
-  handleKeyPress (evt) {
-    if (evt.key === 'Enter') {
-      console.log(this.state)
-    }
-  }
-  handleChangeCola (event, index, values) {
-    this.setState({values: values})
-  }
+  handleChangeSelect (event, index, values) { this.setState({valueSelect: values}) }
+  handleChange (evt) { this.setState({[evt.target.name]: evt.target.value}) }
+  handleChangeDate (evt, date) { this.setState({deadLine: formatDate(date)}) }
+  handleChangeCola (event, index, values) { this.setState({values: values}) }
+  handleKeyPress (evt) { if (evt.key === 'Enter') { console.log(this.state) } }
 
   selectionRenderer (values) {
     switch (values.length) {

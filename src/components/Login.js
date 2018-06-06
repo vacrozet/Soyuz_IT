@@ -18,9 +18,8 @@ class Login extends React.Component {
   }
   static muiName = 'FlatButton'
 
-  handleChange (evt) {
-    this.setState({[evt.target.name]: evt.target.value})
-  }
+  handleChange (evt) { this.setState({[evt.target.name]: evt.target.value}) }
+  handleKeyPress (evt) {if (evt.key === 'Enter') { this.handleConnexion() } }
 
   handleConnexion () {
     if (this.state.mail !== '' && this.state.password !== '') {
@@ -42,12 +41,6 @@ class Login extends React.Component {
         }).catch((err) => {
           console.log('Erreur')
         })
-    }
-  }
-
-  handleKeyPress (evt) {
-    if (evt.key === 'Enter') {
-      this.handleConnexion()
     }
   }
 

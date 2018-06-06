@@ -1,6 +1,7 @@
 const db = require('../../db')
 const validator = require('validator')
 const uuid = require('uuid')
+var randomize = require('randomatic')
 
 function response (res, code, bool, message) {
   res.status(code)
@@ -29,6 +30,7 @@ module.exports = (req, res) => {
           name: req.body.name,
           nameOfSociety: req.body.nameOfSociety,
           adress: req.body.adress,
+          ref: randomize('A', 5),
           next_adress: req.body.suiteAdress,
           pc: req.body.cp,
           city: req.body.ville,
