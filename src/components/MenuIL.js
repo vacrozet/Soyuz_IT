@@ -114,6 +114,3 @@ class MenuIL extends Component {
 export default MenuIL
 
 
-// <ListItem primaryText='Close' leftIcon={<Clear />} onClick={() => {
-//   store.drowerAppBar(false)
-// }} />
